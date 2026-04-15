@@ -10,6 +10,7 @@ module WelcomeServer
     DB_PATH = File.join(APP_ROOT, "welcome.db")
     PORT = 4567
     TEMPLATE_PATH = File.join(APP_ROOT, "views", "index.html.erb")
+    STYLESHEET_PATH = File.join(APP_ROOT, "views", "styles.css")
 
     def initialize(db: SQLite3::Database.new(DB_PATH))
       @db = db
@@ -41,6 +42,10 @@ module WelcomeServer
         editing_name: editing_name,
         escape_html: method(:escape_html)
       )
+    end
+
+    def render_stylesheet
+      File.read(STYLESHEET_PATH)
     end
 
     def escape_html(value)
@@ -90,7 +95,19 @@ module WelcomeServer
       res.body = render_page(message, editing_name)
     end
 
+    def respond_stylesheet(res)
+      res["Content-Type"] = "text/css; charset=utf-8"
+      res["Cache-Control"] = "no-store"
+      res["Pragma"] = "no-cache"
+      res["Expires"] = "0"
+      res.body = render_stylesheet
+    end
+
     def mount_routes(server)
+      server.mount_proc "/styles.css" do |_req, res|
+        respond_stylesheet(res)
+      end
+
       server.mount_proc "/" do |req, res|
         if req.request_method == "POST"
           if req.query["delete_name"]

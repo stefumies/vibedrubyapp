@@ -54,6 +54,16 @@ module WelcomeServer
       assert_includes html, "&lt;Ada&gt;"
       refute_includes html, "<span class=\"name-text\"><Ada></span>"
       assert_includes html, "Hello &lt;Ada&gt;"
+      assert_includes html, '<link rel="stylesheet" href="/styles.css">'
+      assert_includes html, 'message.classList.add("message-hidden")'
+      assert_includes html, "5000"
+    end
+
+    test "render_stylesheet returns the shared CSS" do
+      css = @app.send(:render_stylesheet)
+
+      assert_includes css, ".message-hidden"
+      assert_includes css, "transition: opacity 0.6s ease;"
     end
 
     test "blank name is ignored" do

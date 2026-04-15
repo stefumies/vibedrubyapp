@@ -1,0 +1,162 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  background: #f4f4f4;
+}
+
+.app {
+  width: min(360px, 100%);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+
+.add-form {
+  display: grid;
+  gap: 12px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 401px;
+  overflow-y: auto;
+  border: 1px solid #d7deea;
+  background: #f6f9ff;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e4ebf5;
+  border-left: 4px solid #6ea8fe;
+  background: #ffffff;
+}
+
+.name-row:last-child {
+  border-bottom: 0;
+}
+
+.name-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+.row-actions,
+.edit-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-form {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.row-actions form,
+.name-row > form {
+  width: auto;
+  display: block;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+button {
+  border: 1px solid #cbd5e1;
+  background: #eef4ff;
+}
+
+.icon-button {
+  width: auto;
+  min-width: 44px;
+  padding: 10px 12px;
+}
+
+.edit-input {
+  width: auto;
+  min-width: 0;
+  text-align: left;
+}
+
+.name-row .icon-button,
+.row-actions form,
+.name-row > form {
+  flex-shrink: 0;
+}
+
+.message {
+  min-height: 24px;
+  margin: 0;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.message-hidden {
+  opacity: 0;
+}
+
+.edit-button {
+  background: #eef4ff;
+  border-color: #c6d7ff;
+}
+
+.save-button {
+  background: #ecfdf3;
+  border-color: #b7ebc8;
+}
+
+.delete-button {
+  border-color: #f2c6cc;
+  background: #fff1f3;
+}
+
+.add-form button {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+@media (max-width: 480px) {
+  .name-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .row-actions,
+  .edit-form {
+    width: 100%;
+  }
+
+  .name-row form,
+  .name-row button,
+  .edit-input {
+    width: 100%;
+  }
+}
