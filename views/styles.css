@@ -38,15 +38,24 @@ ul {
 }
 
 .name-row {
+  overflow: hidden;
+  padding: 0;
+  border-bottom: 1px solid #e4ebf5;
+  border-left: 4px solid #6ea8fe;
+  background: #ffffff;
+}
+
+.name-row-body {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
   gap: 12px;
   padding: 10px 12px;
-  border-bottom: 1px solid #e4ebf5;
-  border-left: 4px solid #6ea8fe;
-  background: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+  transform-origin: center;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .name-row:last-child {
@@ -105,10 +114,19 @@ button {
   text-align: left;
 }
 
-.name-row .icon-button,
+.name-row-body .icon-button,
 .row-actions form,
-.name-row > form {
+.name-row-body > form {
   flex-shrink: 0;
+}
+
+.row-shaking {
+  animation: row-shake 0.3s ease-in-out;
+}
+
+.row-fading {
+  opacity: 0;
+  transform: translateX(14px) scale(0.98);
 }
 
 .message {
@@ -143,8 +161,31 @@ button {
   border-color: #86efac;
 }
 
+@keyframes row-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-6px);
+  }
+
+  40% {
+    transform: translateX(6px);
+  }
+
+  60% {
+    transform: translateX(-4px);
+  }
+
+  80% {
+    transform: translateX(4px);
+  }
+}
+
 @media (max-width: 480px) {
-  .name-row {
+  .name-row-body {
     align-items: stretch;
     flex-direction: column;
   }

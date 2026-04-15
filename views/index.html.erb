@@ -13,24 +13,28 @@
           <% safe_name = escape_html.call(name) %>
           <% if name == editing_name %>
             <li class="name-row">
-              <form class="edit-form" method="post" action="/">
-                <input type="hidden" name="original_name" value="<%= safe_name %>">
-                <input class="edit-input" type="text" name="updated_name" value="<%= safe_name %>">
-                <button class="icon-button save-button" type="submit" title="Save">&#10003;</button>
-              </form>
+              <div class="name-row-body">
+                <form class="edit-form" method="post" action="/">
+                  <input type="hidden" name="original_name" value="<%= safe_name %>">
+                  <input class="edit-input" type="text" name="updated_name" value="<%= safe_name %>">
+                  <button class="icon-button save-button" type="submit" title="Save">&#10003;</button>
+                </form>
+              </div>
             </li>
           <% else %>
             <li class="name-row">
-              <span class="name-text"><%= safe_name %></span>
-              <div class="row-actions">
-                <form method="post" action="/">
-                  <input type="hidden" name="edit_name" value="<%= safe_name %>">
-                  <button class="icon-button edit-button" type="submit" title="Edit">&#9998;</button>
-                </form>
-                <form method="post" action="/">
-                  <input type="hidden" name="delete_name" value="<%= safe_name %>">
-                  <button class="icon-button delete-button" type="submit" title="Delete">Delete</button>
-                </form>
+              <div class="name-row-body">
+                <span class="name-text"><%= safe_name %></span>
+                <div class="row-actions">
+                  <form method="post" action="/">
+                    <input type="hidden" name="edit_name" value="<%= safe_name %>">
+                    <button class="icon-button edit-button" type="submit" title="Edit">&#9998;</button>
+                  </form>
+                  <form method="post" action="/">
+                    <input type="hidden" name="delete_name" value="<%= safe_name %>">
+                    <button class="icon-button delete-button" type="submit" title="Delete">Delete</button>
+                  </form>
+                </div>
               </div>
             </li>
           <% end %>
@@ -45,15 +49,43 @@
     <script>
       const addForm = document.querySelector(".add-form");
       const message = document.getElementById("message");
+      const deleteForms = Array.from(
+        document.querySelectorAll('input[name="delete_name"]'),
+        (input) => input.closest("form")
+      ).filter(Boolean);
 
       addForm?.addEventListener("submit", () => {
         message.textContent = "";
       });
 
+      deleteForms.forEach((form) => {
+        form.addEventListener("submit", (event) => {
+          if (form.dataset.animating == "true") {
+            return;
+          }
+
+          event.preventDefault();
+          form.dataset.animating = "true";
+
+          const row = form.closest(".name-row");
+          const rowBody = row?.querySelector(".name-row-body");
+          rowBody?.classList.add("row-shaking");
+
+          window.setTimeout(() => {
+            rowBody?.classList.remove("row-shaking");
+            rowBody?.classList.add("row-fading");
+          }, 300);
+
+          window.setTimeout(() => {
+            form.submit();
+          }, 550);
+        });
+      });
+
       if (message?.textContent.trim()) {
         window.setTimeout(() => {
           message.classList.add("message-hidden");
-        }, 5000);
+        }, 2000);
       }
     </script>
   </body>
