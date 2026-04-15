@@ -56,6 +56,14 @@ If you are using the Firefox LiveReload extension, connect it to:
 127.0.0.1:35729
 ```
 
+## Test
+
+From the project root, run:
+
+```sh
+ruby -Itest test/welcome_server/app_test.rb
+```
+
 ## Behavior
 
 - Enter a name in the `fullname` field and submit.

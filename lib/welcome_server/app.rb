@@ -8,8 +8,8 @@ module WelcomeServer
     DB_PATH = File.join(APP_ROOT, "welcome.db")
     PORT = 4567
 
-    def initialize
-      @db = SQLite3::Database.new(DB_PATH)
+    def initialize(db: SQLite3::Database.new(DB_PATH))
+      @db = db
     end
 
     def run
