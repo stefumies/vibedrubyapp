@@ -1,6 +1,6 @@
 # welcome-server
 
-Minimal Ruby server with one page, app code under `lib/`, and a local SQLite database.
+Minimal Ruby server with one page, app code under `lib/`, an ERB view under `views/`, and a local SQLite database.
 
 ## Requirements
 
@@ -34,12 +34,18 @@ Start with auto-reload for the Ruby app and browser page:
 - the Ruby app restarter
 - a LiveReload server for the browser extension on `127.0.0.1:35729`
 
-The executable entrypoint lives in `bin/server`, and the server implementation lives in `lib/welcome_server/app.rb`.
+The executable entrypoint lives in `bin/server`, the server implementation lives in `lib/welcome_server/app.rb`, the database setup script lives in `db/setup.rb`, and the page template lives in `views/index.html.erb`.
 
 Stop the dev processes:
 
 ```sh
 ./bin/stop
+```
+
+Initialize the SQLite schema manually:
+
+```sh
+./bin/setup_db
 ```
 
 ## Open

@@ -1,11 +1,12 @@
 require "test_helper"
+require_relative "../../db/setup"
 
 module WelcomeServer
   class AppTest < TestHelper::TestCase
     def setup
       @db = SQLite3::Database.new(":memory:")
       @app = App.new(db: @db)
-      @app.send(:setup_db)
+      WelcomeServer::DatabaseSetup.call(@db)
     end
 
     def teardown
@@ -45,10 +46,10 @@ module WelcomeServer
       assert_empty @app.send(:names)
     end
 
-    test "html escapes names and messages" do
+    test "render_page escapes names and messages" do
       @app.send(:find_or_create_message, "<Ada>")
 
-      html = @app.send(:html, "Hello <Ada>")
+      html = @app.send(:render_page, "Hello <Ada>")
 
       assert_includes html, "&lt;Ada&gt;"
       refute_includes html, "<span class=\"name-text\"><Ada></span>"

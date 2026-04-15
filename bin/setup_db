@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require_relative "../db/setup"
+
+db_path = File.expand_path("../welcome.db", __dir__)
+WelcomeServer::DatabaseSetup.setup_file(db_path)
+
+puts "Database ready at #{db_path}"
