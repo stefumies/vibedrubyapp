@@ -26,8 +26,8 @@ rm -f "$pid_file"
 
 for pattern in \
   'bundle exec guard --no-interactions --watchdir .' \
-  'bundle exec rerun --background --no-notify --ignore welcome.db -- ruby app.rb' \
-  'ruby app.rb'; do
+  'bundle exec rerun --background --no-notify --ignore welcome.db -- ruby bin/server' \
+  'ruby bin/server'; do
   if pgrep -f "$pattern" >/dev/null 2>&1; then
     pkill -f "$pattern" 2>/dev/null || true
     stopped=1

@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/welcome_server/app"
+
+WelcomeServer::App.new.run

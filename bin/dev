@@ -28,7 +28,7 @@ trap cleanup EXIT
 
 bundle exec guard --no-interactions --watchdir . &
 guard_pid=$!
-bundle exec rerun --background --no-notify --ignore 'welcome.db' -- ruby app.rb &
+bundle exec rerun --background --no-notify --ignore 'welcome.db' -- ruby bin/server &
 rerun_pid=$!
 printf '%s\n%s\n' "$guard_pid" "$rerun_pid" > "$pid_file"
 

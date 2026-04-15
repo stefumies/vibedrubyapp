@@ -1,6 +1,6 @@
 # welcome-server
 
-Minimal Ruby server with one page, one Ruby file, and a local SQLite database.
+Minimal Ruby server with one page, app code under `lib/`, and a local SQLite database.
 
 ## Requirements
 
@@ -20,7 +20,7 @@ bundle install
 Start once:
 
 ```sh
-bundle exec ruby app.rb
+bundle exec ruby bin/server
 ```
 
 Start with auto-reload for the Ruby app and browser page:
@@ -33,6 +33,8 @@ Start with auto-reload for the Ruby app and browser page:
 
 - the Ruby app restarter
 - a LiveReload server for the browser extension on `127.0.0.1:35729`
+
+The executable entrypoint lives in `bin/server`, and the server implementation lives in `lib/welcome_server/app.rb`.
 
 Stop the dev processes:
 
